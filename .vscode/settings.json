@@ -1,0 +1,38 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 200,
+    "files.refactoring.autoSave": false,
+    "workbench.iconTheme": "file-icons",
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingPairs": [
+        {
+            "open": "<",
+            "close": ">"
+        },
+        {
+            "open": "(",
+            "close": ")"
+        },
+        {
+            "open": "{",
+            "close": "}"
+        },
+        {
+            "open": "[",
+            "close": "]"
+        },
+        {
+            "open": "\"",
+            "close": "\""
+        }
+    ]
+    "rust-analyzer.checkOnSave": true,
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "json.schemaDownload.enable": true
+}
