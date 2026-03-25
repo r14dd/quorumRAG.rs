@@ -1,0 +1,19 @@
+quorum_threshold = 2
+top_k = 10
+cluster_threshold = 0.85
+
+[[retrievers]]
+retriever_type = "dense"
+chunk_size = 256
+
+[[retrievers]]
+retriever_type = "dense"
+chunk_size = 512
+
+[[retrievers]]
+retriever_type = "bm25"
+chunk_size = 512
+
+[ollama]
+url = "http://localhost:11434"
+model = "mistral"
