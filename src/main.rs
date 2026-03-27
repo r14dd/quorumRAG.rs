@@ -1,4 +1,5 @@
 mod config;
+mod embedding;
 mod models;
 mod retrievers;
 mod clustering;
@@ -14,6 +15,10 @@ use config::Config;
 async fn main() -> Result<()> {
     let config_str = std::fs::read_to_string("config.toml")?;
     let config: Config = toml::from_str(&config_str)?;
-    println!("Loaded config: {:#?}", config);
+
+    let embedder = embedding::EmbeddingClient::new(&config.ollama.url, "nomic-embed-text");
+    let vec = embedder.embed("hello world").await?;
+    println!("Embedding dim: {}", vec.len());
+
     Ok(())
 }
