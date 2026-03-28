@@ -1,3 +1,5 @@
+pub mod dense;
+
 use crate::models::Candidate;
 use anyhow::Result;
 
