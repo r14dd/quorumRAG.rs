@@ -8,6 +8,10 @@ pub struct Chunk {
     pub embedding: Vec<f32>,
 }
 
+pub struct Query {
+    pub text: String,
+    pub embedding: Vec<f32>
+}
 /// This is going to be a candidate returned by a single retriever.
 #[derive(Debug, Clone)]
 pub struct Candidate {

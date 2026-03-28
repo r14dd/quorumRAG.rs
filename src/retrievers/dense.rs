@@ -1,5 +1,5 @@
 use crate::embedding::EmbeddingClient;
-use crate::models::{Candidate, Chunk};
+use crate::models::{Candidate, Chunk, Query};
 use crate::retrievers::Retriever;
 use anyhow::{Ok, Result};
 
@@ -53,11 +53,11 @@ impl Retriever for DenseRetriever {
         &self.id
     }
 
-    fn retrieve(&self, query_embedding: &[f32], top_k: usize) -> Result<Vec<Candidate>> {
+    fn retrieve(&self, query: &Query, top_k: usize) -> Result<Vec<Candidate>> {
         let mut scored: Vec<(f32, &Chunk)> = self
             .chunks
             .iter()
-            .map(|chunk| (cosine_similarity(query_embedding, &chunk.embedding), chunk))
+            .map(|chunk| (cosine_similarity(&query.embedding, &chunk.embedding), chunk))
             .collect();
 
         scored.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap());
