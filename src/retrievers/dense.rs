@@ -35,6 +35,11 @@ impl DenseRetriever {
         }
         Ok(())
     }
+
+    pub async fn index_chunks(&mut self, chunks: Vec<Chunk>) -> Result<()> {
+        self.chunks = chunks;
+        Ok(())
+}
 }
 
 

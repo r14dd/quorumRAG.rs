@@ -59,7 +59,11 @@ impl Retriever for Bm25Retriever {
         let body_field = self.schema.get_field("body").unwrap();
         let id_field = self.schema.get_field("chunk_id").unwrap();
         let query_parser = QueryParser::for_index(&self.index, vec![body_field]);
-        let tantivy_query = query_parser.parse_query(&query.text)?;
+        let sanitized: String = query.text
+            .chars()
+            .filter(|c| c.is_alphanumeric() || c.is_whitespace())
+            .collect();
+        let tantivy_query = query_parser.parse_query(&sanitized)?;
         let top_docs = searcher.search(&tantivy_query, &TopDocs::with_limit(top_k))?;
 
         let mut candidates = Vec::new();

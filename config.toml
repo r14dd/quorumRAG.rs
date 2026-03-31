@@ -1,18 +1,26 @@
 quorum_threshold = 2
-top_k = 10
+top_k = 15
 cluster_threshold = 0.85
 
 [[retrievers]]
 retriever_type = "dense"
-chunk_size = 10
+chunk_size = 50
+overlap = 25
 
 [[retrievers]]
 retriever_type = "dense"
-chunk_size = 20
+chunk_size = 100
+overlap = 50
+
+[[retrievers]]
+retriever_type = "dense"
+chunk_size = 200
+overlap = 100
 
 [[retrievers]]
 retriever_type = "bm25"
-chunk_size = 10
+chunk_size = 100
+overlap = 50
 
 [ollama]
 url = "http://localhost:11434"

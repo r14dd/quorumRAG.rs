@@ -12,7 +12,9 @@ pub struct Config {
 #[derive(Debug, Deserialize)]
 pub struct RetrieverConfig {
     pub retriever_type: RetrieverType,
-    pub chunk_size: usize
+    pub chunk_size: usize,
+    #[serde(default)]
+    pub overlap: usize,
 }
 
 #[derive(Debug, Deserialize, PartialEq)]
