@@ -4,15 +4,15 @@ cluster_threshold = 0.85
 
 [[retrievers]]
 retriever_type = "dense"
-chunk_size = 256
+chunk_size = 10
 
 [[retrievers]]
 retriever_type = "dense"
-chunk_size = 512
+chunk_size = 20
 
 [[retrievers]]
 retriever_type = "bm25"
-chunk_size = 512
+chunk_size = 10
 
 [ollama]
 url = "http://localhost:11434"
