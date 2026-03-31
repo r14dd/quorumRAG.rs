@@ -1,0 +1,22 @@
+[
+    {
+        "query": "Where is the Eiffel Tower?",
+        "relevant": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris"
+    },
+    {
+        "query": "Who designed the Eiffel Tower?",
+        "relevant": "It is named after the engineer Gustave Eiffel"
+    },
+    {
+        "query": "What is the Louvre?",
+        "relevant": "The Louvre is the world's largest art museum and is located in Paris"
+    },
+    {
+        "query": "What is the Brandenburg Gate?",
+        "relevant": "The Brandenburg Gate is an 18th-century neoclassical monument in Berlin"
+    },
+    {
+        "query": "What river runs through Germany?",
+        "relevant": "The Rhine is one of the major rivers in Germany"
+    }
+]
