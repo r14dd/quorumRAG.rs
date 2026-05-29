@@ -64,7 +64,8 @@ impl Retriever for Bm25Retriever {
             .filter(|c| c.is_alphanumeric() || c.is_whitespace())
             .collect();
         let tantivy_query = query_parser.parse_query(&sanitized)?;
-        let top_docs = searcher.search(&tantivy_query, &TopDocs::with_limit(top_k))?;
+        let top_docs =
+            searcher.search(&tantivy_query, &TopDocs::with_limit(top_k).order_by_score())?;
 
         let mut candidates = Vec::new();
         for (score, doc_address) in top_docs {
@@ -78,7 +79,7 @@ impl Retriever for Bm25Retriever {
             if let Some(chunk) = self.chunks.iter().find(|c| c.id == chunk_id) {
                 candidates.push(Candidate {
                     chunk: chunk.clone(),
-                    score: score as f32,
+                    score,
                     retriever_id: self.id.to_string(),
                 });
             }
