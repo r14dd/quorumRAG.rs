@@ -50,21 +50,25 @@ pub fn load_chunks_from_dir(
     Ok(chunks)
 }
 
-pub fn cache_path(retriever_id: &str) -> String {
-    format!("data/cache/{}.json", retriever_id.replace("/", "_"))
+pub fn cache_path(cache_dir: &str, retriever_id: &str) -> String {
+    format!("{}/{}.json", cache_dir, retriever_id.replace("/", "_"))
 }
 
-pub fn load_cache(retriever_id: &str) -> Option<Vec<crate::models::Chunk>> {
-    let path = cache_path(retriever_id);
+pub fn load_cache(cache_dir: &str, retriever_id: &str) -> Option<Vec<crate::models::Chunk>> {
+    let path = cache_path(cache_dir, retriever_id);
     let content = std::fs::read_to_string(&path).ok()?;
     let cached: CachedChunks = serde_json::from_str(&content).ok()?;
     Some(cached.chunks)
 }
 
-pub fn save_cache(retriever_id: &str, chunks: &[crate::models::Chunk]) -> anyhow::Result<()> {
-    std::fs::create_dir_all("data/cache")?;
+pub fn save_cache(
+    cache_dir: &str,
+    retriever_id: &str,
+    chunks: &[crate::models::Chunk],
+) -> anyhow::Result<()> {
+    std::fs::create_dir_all(cache_dir)?;
     let cached = CachedChunks { chunks: chunks.to_vec() };
     let content = serde_json::to_string(&cached)?;
-    std::fs::write(cache_path(retriever_id), content)?;
+    std::fs::write(cache_path(cache_dir, retriever_id), content)?;
     Ok(())
 }

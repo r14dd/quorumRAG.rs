@@ -144,6 +144,45 @@ cargo run -- --query "What is backpropagation?"
 
 ---
 
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#-use-as-a-library)
+
+## ➤ 📦 Use as a library
+
+Add it to your project:
+
+```toml
+[dependencies]
+quorumrag = "0.1"
+```
+
+Build a pipeline from a `Config` and ask questions. The pipeline indexes the
+corpus (using the embedding cache when available) on `build`:
+
+```rust
+use quorumrag::{Config, QuorumRag};
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    let config: Config = toml::from_str(&std::fs::read_to_string("config.toml")?)?;
+    let rag = QuorumRag::build(config).await?;
+
+    // Full RAG: quorum retrieval + generation.
+    let answer = rag.answer("What is backpropagation?").await?;
+    println!("{answer}");
+
+    // Or inspect the evidence yourself before generating.
+    let result = rag.retrieve("What is backpropagation?", true).await?;
+    println!("support={}, clusters={}", result.max_support, result.clusters.len());
+    Ok(())
+}
+```
+
+`Config` fields such as `corpus_dir`, `cache_dir`, the embedding model, RRF
+constant, and ranking weights are all configurable (with sensible defaults), so
+the library makes no assumptions about your working directory.
+
+---
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#-configuration)
 
 ## ➤ ⚙️ Configuration
@@ -233,4 +272,5 @@ QuorumRAG additionally provides a **support score** (1–4) on every answer, ind
 
 ## ➤ License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Licensed under either of [MIT](LICENSE-MIT) or
+[Apache-2.0](LICENSE-APACHE) at your option.

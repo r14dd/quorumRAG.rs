@@ -2,6 +2,22 @@
 name = "quorumrag"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
+description = "Quorum-based retrieval-augmented generation: fuse multiple retrievers and keep only the evidence they agree on."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/r14dd/quorumRAG.rs"
+readme = "README.md"
+keywords = ["rag", "retrieval", "llm", "embeddings", "ollama"]
+categories = ["text-processing", "science"]
+exclude = ["data/", "scripts/", ".vscode/"]
+
+[lib]
+name = "quorumrag"
+path = "src/lib.rs"
+
+[[bin]]
+name = "quorumrag"
+path = "src/main.rs"
 
 [dependencies]
 anyhow = "1"

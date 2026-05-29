@@ -8,9 +8,11 @@ pub struct Chunk {
     pub embedding: Vec<f32>,
 }
 
+/// A query with its text and precomputed embedding.
+#[derive(Debug, Clone)]
 pub struct Query {
     pub text: String,
-    pub embedding: Vec<f32>
+    pub embedding: Vec<f32>,
 }
 /// This is going to be a candidate returned by a single retriever.
 #[derive(Debug, Clone)]
